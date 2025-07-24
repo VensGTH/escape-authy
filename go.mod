@@ -5,6 +5,7 @@ go 1.24.4
 require (
 	github.com/google/uuid v1.6.0
 	github.com/spf13/cobra v1.9.1
+	golang.org/x/text v0.27.0
 )
 
 require (
