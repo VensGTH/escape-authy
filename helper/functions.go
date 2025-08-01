@@ -51,7 +51,7 @@ func DetermineIssuer(token model.DecryptedToken) string {
 		issuer = strings.TrimSpace(parts[0])
 	}
 
-	// Last resort, try to extract from token.Logo where token logo name != authenticator
+	// Last resort, try to extract from token.Logo where token.Logo doesn't contain "authenticator"
 	if issuer == "" && token.Logo != nil && !strings.HasPrefix(*token.Logo, "authenticator") {
 		issuer = cases.Title(language.Und).String(*token.Logo)
 	}
