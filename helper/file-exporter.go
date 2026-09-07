@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -9,7 +10,8 @@ import (
 
 func ExportFile(data any, fileName string) error {
 
-	prettyJSON, err := json.MarshalIndent(data, "", "  ")
+	//prettyJSON, err := json.MarshalIndent(data, "", "  ")
+	prettyJSON, err := JSONMarshal(data)
 	if err != nil {
 		fmt.Println("Error marshalling:", err)
 		return err
@@ -37,4 +39,13 @@ func ExportPlainText(data []string, fileName string) error {
 
 	fmt.Printf("File written to %s\n", fileName)
 	return nil
+}
+
+func JSONMarshal(t interface{}) ([]byte, error) {
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	encoder.SetIndent("", "  ")
+	err := encoder.Encode(t)
+	return buffer.Bytes(), err
 }

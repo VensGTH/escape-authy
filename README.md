@@ -22,6 +22,8 @@ So I created this project to help others like me who want a simple, reliable way
 
 - [Ente](https://ente.io/auth/) - `escape-authy toEnte`
 
+- [Proton](https://proton.me/authenticator) - `escape-authy toProton`
+
 ## How to use
 
 > ⚠️ Make sure you've already retrieved the `decrypted_tokens.json` file by following [this guide](https://github.com/AlexTech01/Authy-iOS-MiTM).
