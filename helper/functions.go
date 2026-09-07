@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"github.com/crossRT/escape-authy/model"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 func SafeString(s *string) string {
@@ -47,6 +49,11 @@ func DetermineIssuer(token model.DecryptedToken) string {
 	parts := strings.SplitN(token.Name, ":", 2)
 	if len(parts) == 2 {
 		issuer = strings.TrimSpace(parts[0])
+	}
+
+	// Last resort, try to extract from token.Logo where token.Logo doesn't contain "authenticator"
+	if issuer == "" && token.Logo != nil && !strings.HasPrefix(*token.Logo, "authenticator") {
+		issuer = cases.Title(language.Und).String(*token.Logo)
 	}
 
 	return issuer

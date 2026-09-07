@@ -58,7 +58,19 @@ var toAegisCmd = &cobra.Command{
 			aegisEntries = append(aegisEntries, aegisEntry)
 		}
 
-		err = helper.ExportFile(aegisEntries, "aegis.json")
+		aegisOutput := model.AegisBase{
+			Version: 1,
+			Header: model.AegisHeader{
+				Slots: nil,
+				Params: nil,
+			},
+			Db: model.AegisDB{
+				Version: 3,
+				Entries: aegisEntries,
+			},
+		}
+
+		err = helper.ExportFile(aegisOutput, "aegis.json")
 		if err != nil {
 			panic(err)
 		}
